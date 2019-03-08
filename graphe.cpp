@@ -36,7 +36,12 @@ graphe::graphe(std::string nomFichier){
 }
 void graphe::afficher() const{
     std::cout<<"graphe : "<<std::endl;
-    std::cout<<"  coder l'affichage ! "<<std::endl;
+    //std::cout << "  ordre : " << m_sommets.size() << std::endl;
+    for(const auto& it : m_sommets)
+    {
+        std::cout << "  sommet : " << (it.second->afficherData()) << std::endl << (it.second->afficherVoisins());
+    }
+
 }
 
 void graphe::parcoursBFS(std::string id) const{
