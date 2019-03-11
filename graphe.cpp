@@ -39,7 +39,10 @@ void graphe::afficher() const{
     //std::cout << "  ordre : " << m_sommets.size() << std::endl;
     for(const auto& it : m_sommets)
     {
-        std::cout << "  sommet : " << (it.second->afficherData()) << std::endl << (it.second->afficherVoisins());
+        std::cout << "  sommet : ";
+        (it.second->afficherData());
+        (it.second->afficherVoisins());
+        std::cout << std::endl;
     }
 
 }
