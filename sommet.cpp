@@ -3,12 +3,15 @@
 #include <stack>
 #include<unordered_map>
 #include<unordered_set>
+#include <algorithm>
 #include "sommet.h"
+
+bool compareSommets(const Sommet* a, const Sommet* b) { return ((*a).getID() > (*b).getID()); } /// Permet de comparer des const Sommet* (a l'envers car insert de map ajoute au debut)
 
 Sommet::Sommet(std::string id,double x,double y):m_id{id},m_x{x},m_y{y}
 {
 }
-void Sommet::ajouterVoisin(const Sommet* voisin){
+void Sommet::ajouterVoisin( Sommet* voisin){
     m_voisins.push_back(voisin);
 }
  void Sommet::afficherData() const{
@@ -21,21 +24,42 @@ void Sommet::afficherVoisins() const{
     }
 }
 
-std::unordered_map<std::string,std::string> Sommet::parcoursBFS() const{
-    std::unordered_map<std::string,std::string> l_pred;
-    std::cout<<"BFS a completer"<<std::endl;
-    return l_pred;
+std::unordered_map<std::string,std::string> Sommet::parcoursBFS(){
+
+    std::unordered_map<std::string,std::string> arbre;
+
+    std::sort(m_voisins.begin(), m_voisins.end(), compareSommets);
+
+    for(const auto& elem : m_voisins)
+    {
+        arbre.insert(std::make_pair((*(elem)).getID(), this->getID()));
+    }
+
+    return arbre;
 }
-std::unordered_map<std::string,std::string> Sommet::parcoursDFS() const{
-    std::unordered_map<std::string,std::string> l_pred;
-    std::cout<<"DFS a completer"<<std::endl;
-    return l_pred;
+std::unordered_map<std::string,std::string> Sommet::parcoursDFS(){
+
+    std::unordered_map<std::string,std::string> arbre;
+
+    std::sort(m_voisins.begin(), m_voisins.end(), compareSommets);
+
+    for(const auto& elem : m_voisins)
+    {
+        arbre.insert(std::make_pair((*(elem)).getID(), this->getID()));
+    }
+
+    return arbre;
 }
 std::unordered_set<std::string> Sommet::rechercherCC() const{
     std::unordered_set<std::string> cc;
     std::cout<<"rechercherCC a coder"<<std::endl;
     return cc;
 }
+
+std::string Sommet::getID()const{
+    return m_id;
+}
+
 Sommet::~Sommet()
 {
     //dtor

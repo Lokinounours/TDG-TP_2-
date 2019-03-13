@@ -50,3 +50,66 @@
 	<unordered_set>
 	"sommet.h"
 
+1552299982 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2bis\tdg-tp_2-\main.cpp
+	<iostream>
+	"graphe.h"
+
+1552292017 c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2bis\tdg-tp_2-\graphe.h
+	<string>
+	<unordered_map>
+	<unordered_set>
+	<stack>
+	<queue>
+	"sommet.h"
+
+1552298759 c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2bis\tdg-tp_2-\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1552300181 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2bis\tdg-tp_2-\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<unordered_map>
+	<unordered_set>
+	"sommet.h"
+
+1552300298 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2bis\tdg-tp_2-\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+
+1552492155 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2\tdg-tp_2-\main.cpp
+	<iostream>
+	"graphe.h"
+
+1552492228 c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2\tdg-tp_2-\graphe.h
+	<string>
+	<unordered_map>
+	<unordered_set>
+	<stack>
+	<queue>
+	"sommet.h"
+
+1552492261 c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2\tdg-tp_2-\sommet.h
+	<string>
+	<vector>
+	<unordered_map>
+	<unordered_set>
+
+1552490441 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2\tdg-tp_2-\sommet.cpp
+	<iostream>
+	<queue>
+	<stack>
+	<unordered_map>
+	<unordered_set>
+	<algorithm>
+	"sommet.h"
+
+1552492211 source:c:\users\thoma\documents\cours\ing 2\c++\théorie des graphes\tp2\tdg-tp_2-\graphe.cpp
+	<fstream>
+	<iostream>
+	"graphe.h"
+

@@ -2,6 +2,9 @@
 #define GRAPHE_H
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
+#include <stack>
+#include <queue>
 #include "sommet.h"
 
 class graphe
@@ -13,11 +16,11 @@ class graphe
         ~graphe();
         void afficher() const;
         ///lance un parcours en largeur à partir du sommet d'identifiant id
-        void parcoursBFS(std::string) const;
+        std::unordered_map<std::string, std::string> parcoursBFS(std::string) const;
         ///lance et affiche le parcours en largeur à partir du sommet d'identifiant id
         void afficherBFS(std::string) const;
          ///lance un parcours en profondeur à partir du sommet d'identifiant id
-        void parcoursDFS(std::string) const;
+        std::unordered_map<std::string, std::string> parcoursDFS(std::string) const;
         ///lance et affiche le parcours en profondeur à partir du sommet d'identifiant id
         void afficherDFS(std::string) const;
         ///recherche et affiche les composantes connexes
