@@ -26,6 +26,8 @@ class graphe
         ///recherche et affiche les composantes connexes
         ///retourne le nombre de composantes connexes
         int rechercher_afficherToutesCC() const;
+        ///Permet l'affichage des CC
+        void afficherCC(std::unordered_map<std::string,std::string> arbre) const;
 
     protected:
 

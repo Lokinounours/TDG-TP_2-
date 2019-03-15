@@ -55,12 +55,15 @@ std::unordered_map<std::string, std::string> graphe::parcoursBFS(std::string id)
 
     file.push(id);
     dejaVu.insert(id);
+    arbre.insert(std::make_pair(id, "null"));
 
     while(!file.empty())
     {
         std::string s_courant = file.front();
         Sommet* s0 = (m_sommets.find(s_courant))->second;
         std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursBFS();
+
+        file.pop(); /// On retire le premier entre dans la liste pour lequel on a note les voisins
 
         for(auto const& elem : arbreSommet) /// On parcourt la map pour ajouter ce qu'on a trouvé dans le set et pour les ajouter la file
         {
@@ -71,8 +74,6 @@ std::unordered_map<std::string, std::string> graphe::parcoursBFS(std::string id)
                 arbre.insert(elem);
             }
         }
-
-        file.pop(); /// On retire le premier entre dans la liste pour lequel on a note les voisins
     }
 
     return arbre;
@@ -84,14 +85,15 @@ void graphe::afficherBFS(std::string id) const{
     for(auto const& elem : arbre)
     {
         std::string courant = elem.first;
-        std::cout << elem.first;
-        while(arbre.find(courant) != arbre.end()){
-            std::cout << " <--- " << (arbre.find(courant))->second;
+        while((arbre.find(courant))->second != "null"){
+            std::cout << (arbre.find(courant))->first;
+            std::cout << " <--- ";
             courant = (arbre.find(courant))->second;
         }
-        std::cout << std::endl;
+        std::cout << (arbre.find(courant))->first << std::endl;
     }
 }
+
 std::unordered_map<std::string, std::string> graphe::parcoursDFS(std::string id) const{
 
     std::unordered_map<std::string, std::string> arbre; /// Permet de ranger l'arbre dans une map sous forme (sommet deocuvert, predecesseur)
@@ -138,11 +140,34 @@ void graphe::afficherDFS(std::string id) const{
     }
 }
 int graphe::rechercher_afficherToutesCC() const{
-    int i=0;
-    std::cout<<"composantes connexes :"<<std::endl;
-    std::cout<<"recherche et affichage de toutes les composantes connexes a coder"<<std::endl;
-    return i;
+    int composantes = 0;
+    std::cout<< std::endl << "composantes connexes :"<<std::endl;
+
+    std::unordered_map<std::string, std::string> arbreTotal;
+
+    for(const auto& it : m_sommets){
+        if(arbreTotal.find(it.first) == arbreTotal.end()){
+            auto arbreBFS = parcoursBFS(it.first);
+            for(const auto& parcoursArbre : arbreBFS){
+                arbreTotal.insert(parcoursArbre);
+            }
+            composantes++;
+            std::cout << std::endl << "    cc" << composantes;
+            afficherCC(arbreBFS);
+        }
+    }
+    std::cout << std::endl << std::endl;
+
+    return composantes;
 }
+
+void graphe::afficherCC(std::unordered_map<std::string,std::string> arbre) const{
+    std::cout << std::endl;
+    for(const auto& it : arbre){
+        std::cout << "      " << it.first;
+    }
+}
+
 graphe::~graphe()
 {
     //dtor
