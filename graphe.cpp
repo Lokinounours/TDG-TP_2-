@@ -106,14 +106,11 @@ std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id,
     Sommet* s0 = (m_sommets.find(id))->second; /// first = id/ second = ptr
     std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursDFS(); /// Renvoie en format : Valeur/predecesseur
 
-    std::cout << "sommet Actuel   " << id << std::endl;
     for(auto const& elem : arbreSommet)
     {
         auto recherche = dejaVu.find(elem.first);
             if (recherche == dejaVu.end()){
                 arbre.insert({elem.first, id});
-                for(auto const& elem : dejaVu)std::cout << " / " << elem;
-                std::cout << std::endl;
                 recursifDFS(elem.first, arbre, dejaVu);
         }
     }
