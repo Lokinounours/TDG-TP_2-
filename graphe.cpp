@@ -93,7 +93,7 @@ void graphe::afficherBFS(std::string id) const{
         std::cout << (arbre.find(courant))->first << std::endl;
     }
 }
-
+/// c'est une surcharge de la fonction recursifDFS pour pouvoir passer arbre et dejaVU en paramètre par défault
 std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id) const{
     std::unordered_map<std::string, std::string> arbre;
     std::unordered_set<std::string> dejaVu;
@@ -102,22 +102,22 @@ std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id)
 }
 std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id, std::unordered_map<std::string, std::string> &arbre, std::unordered_set<std::string> &dejaVu) const{
 
-    dejaVu.insert(id);
+    dejaVu.insert(id); /// on crée un set pour les sommets qui sont déjà visité
     Sommet* s0 = (m_sommets.find(id))->second; /// first = id/ second = ptr
     std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursDFS(); /// Renvoie en format : Valeur/predecesseur
+    /// on retrouve ainsi l'ensemble des voisions du sommet(id)
 
     for(auto const& elem : arbreSommet)
     {
-        auto recherche = dejaVu.find(elem.first);
-            if (recherche == dejaVu.end()){
+            if (dejaVu.find(elem.first) == dejaVu.end()){ /// si le sommet n'est pas visité alors on rajoute le sommet dans arbre et on relance le programme avec le sommet en id
                 arbre.insert({elem.first, id});
                 recursifDFS(elem.first, arbre, dejaVu);
         }
     }
+    /// une fois la récursivité finie on peut envoyer l'arbre à afficherDFS
     return arbre;
 
 }
-
 void graphe::afficherDFS(std::string id) const{
 
     std::unordered_map<std::string, std::string> arbre = recursifDFS(id);
@@ -164,17 +164,17 @@ void graphe::afficherCC(std::unordered_map<std::string,std::string> arbre) const
 }
 
 int graphe::isEulerien(){
-    std::set<int> degre;
+    std::set<int> degre; /// un set qui va stocker le nombre d'arrete pour chaque sommet
     int nbImpair = 0;
-    for (const auto& item: m_sommets)degre.insert(item.second->getDegre());
-    for (const auto& item: degre){
+    for (const auto& item: m_sommets)degre.insert(item.second->getDegre()); /// rempli le set
+    for (const auto& item: degre){ /// boucle parcourant le set et comptant le nombre de sommet de degre pair
             if(item%2 == 1){
                 nbImpair++;
             }
     }
-    if (nbImpair == 2)return 1;
-    else if (nbImpair == 0)return 2;
-    else return 0;
+    if (nbImpair == 2)return 1; /// si 2 nombres impairs alors le graph est une chaine eulerienne
+    else if (nbImpair == 0)return 2; /// si aucun nombre impair alors c'est un cycle eulerien
+    else return 0; /// sinon on renvoit 0 car le graph n'a rien d'eulerien
 }
 
 graphe::~graphe()

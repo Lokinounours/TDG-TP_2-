@@ -20,8 +20,7 @@ class graphe
         std::unordered_map<std::string, std::string> parcoursBFS(std::string) const;
         ///lance et affiche le parcours en largeur à partir du sommet d'identifiant id
         void afficherBFS(std::string) const;
-         ///lance un parcours en profondeur à partir du sommet d'identifiant id
-        std::unordered_map<std::string, std::string> parcoursDFS(std::string) const;
+
         ///lance et affiche le parcours en profondeur à partir du sommet d'identifiant id
         void afficherDFS(std::string) const;
         ///recherche et affiche les composantes connexes
@@ -32,7 +31,10 @@ class graphe
 
         int isEulerien();
 
+        ///lance un parcours en profondeur à partir du sommet d'identifiant id en mode Récursif
+        /// Le programme se relance ainsi de lui même tant qu'il n'a pas exploré tous les sommets ou si ils sont déjà tous dans déjàVu
         std::unordered_map<std::string, std::string> recursifDFS(std::string id, std::unordered_map<std::string, std::string> &arbre, std::unordered_set<std::string> &dejaVu) const;
+        ///Surchage de la fonction RecursifDFS pour pouvoir lancer le DFS sans avoir à donner un arbre et un déjàVU
         std::unordered_map<std::string, std::string> recursifDFS(std::string id) const;
 
     protected:
