@@ -29,6 +29,9 @@ class graphe
         ///Permet l'affichage des CC
         void afficherCC(std::unordered_map<std::string,std::string> arbre) const;
 
+        std::unordered_map<std::string, std::string> recursifDFS(std::string id, std::unordered_map<std::string, std::string> &arbre, std::unordered_set<std::string> &dejaVu) const;
+        std::unordered_map<std::string, std::string> recursifDFS(std::string id) const;
+
     protected:
 
     private:

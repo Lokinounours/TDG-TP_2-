@@ -7,6 +7,8 @@
 #include "sommet.h"
 
 bool compareSommets(const Sommet* a, const Sommet* b) { return ((*a).getID() > (*b).getID()); } /// Permet de comparer des const Sommet* (a l'envers car insert de map ajoute au debut)
+bool compareSommetsDFS(const Sommet* a, const Sommet* b) { return ((*a).getID() < (*b).getID()); } /// Permet de comparer des const Sommet* (a l'envers car insert de map ajoute au debut)
+
 
 Sommet::Sommet(std::string id,double x,double y):m_id{id},m_x{x},m_y{y}
 {
@@ -45,6 +47,8 @@ std::unordered_map<std::string,std::string> Sommet::parcoursDFS(){
 
     for(const auto& elem : m_voisins)
     {
+        ///std::cout << "   valeurs du voisins après trie" << (*(elem)).getID() << std::endl;
+        /// pour vérifier que le trie s'éffectue correctement et c'est validé
         arbre.insert(std::make_pair((*(elem)).getID(), this->getID()));
     }
 

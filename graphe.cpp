@@ -94,40 +94,38 @@ void graphe::afficherBFS(std::string id) const{
     }
 }
 
-std::unordered_map<std::string, std::string> graphe::parcoursDFS(std::string id) const{
-
-    std::unordered_map<std::string, std::string> arbre; /// Permet de ranger l'arbre dans une map sous forme (sommet deocuvert, predecesseur)
-    std::unordered_set<std::string> dejaVu;  /// Permet de garder une trace des sommets déjà rencontrés
-    std::stack<std::string> pile;   /// File des sommets autour desquels il faut explorer
-
-    pile.push(id);
-    dejaVu.insert(id);
-
-    while(!pile.empty())
-    {
-        std::string s_courant = pile.top();
-        Sommet* s0 = (m_sommets.find(s_courant))->second;
-        std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursDFS();
-        pile.pop(); /// On pop ici afin de l'enlever avant d'ajouter d'autres sommets
-
-        for(auto const& elem : arbreSommet) /// On parcourt la map pour ajouter ce qu'on a trouvé dans le set et pour les ajouter la pile
-        {
-            auto recherche = dejaVu.find(elem.first);
-            if (recherche == dejaVu.end()){
-                dejaVu.insert(elem.first);
-                pile.push(elem.first);
-                arbre.insert(elem);
-            }
-        }
-
-    }
-
+std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id) const{
+    std::unordered_map<std::string, std::string> arbre;
+    std::unordered_set<std::string> dejaVu;
+    recursifDFS(id, arbre, dejaVu);
     return arbre;
 }
+std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id, std::unordered_map<std::string, std::string> &arbre, std::unordered_set<std::string> &dejaVu) const{
+
+    dejaVu.insert(id);
+    Sommet* s0 = (m_sommets.find(id))->second; /// first = id/ second = ptr
+    std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursDFS(); /// Renvoie en format : Valeur/predecesseur
+
+    std::cout << "sommet Actuel   " << id << std::endl;
+    for(auto const& elem : arbreSommet)
+    {
+        auto recherche = dejaVu.find(elem.first);
+            if (recherche == dejaVu.end()){
+                arbre.insert({elem.first, id});
+                for(auto const& elem : dejaVu)std::cout << " / " << elem;
+                std::cout << std::endl;
+                recursifDFS(elem.first, arbre, dejaVu);
+        }
+    }
+    return arbre;
+
+}
+
 void graphe::afficherDFS(std::string id) const{
 
-    std::unordered_map<std::string, std::string> arbre = parcoursDFS(id);
+    std::unordered_map<std::string, std::string> arbre = recursifDFS(id);
 
+    std::cout << arbre.size();
     for(auto const& elem : arbre)
     {
         std::string courant = elem.first;
