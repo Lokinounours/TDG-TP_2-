@@ -18,15 +18,9 @@ class Sommet
         std::unordered_map<std::string,std::string> parcoursBFS();
          ///méthode de parcours en profondeur du graphe à partir du sommet
         std::unordered_map<std::string,std::string> parcoursDFS();
-        ///méthode qui recherche la composante connexe du sommet
-        ///renvoie la liste des ids des sommets de la composante
-        std::unordered_set<std::string> rechercherCC() const;
         ///GETTERS
         std::string getID()const;
         int getDegre()const;
-        /// Fonction(s) inline
-        //bool compareSommets(const Sommet* a, const Sommet* b)const { return (a->getID() < b->getID()); } /// Permet de comparer des const Sommet*
-        //bool operator<(const Sommet& )
         ~Sommet();
 
     protected:

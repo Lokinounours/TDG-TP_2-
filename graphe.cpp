@@ -34,7 +34,7 @@ graphe::graphe(std::string nomFichier){
         (m_sommets.find(id_voisin))->second->ajouterVoisin((m_sommets.find(id))->second);//remove si graphe orienté
     }
 }
-void graphe::afficher() const{
+void graphe::afficher() const{  /// Affiche les sommets et coordonnees et voisins de ce qu'il y a dans graphe
     std::cout<<"graphe : "<<std::endl;
     std::cout << "  ordre : " << m_sommets.size() << std::endl;
     for(const auto& it : m_sommets)
@@ -53,6 +53,7 @@ std::unordered_map<std::string, std::string> graphe::parcoursBFS(std::string id)
     std::unordered_set<std::string> dejaVu;  /// Permet de garder une trace des sommets déjà rencontrés
     std::queue<std::string> file;   /// File des sommets autour desquels il faut explorer
 
+    /// On initialise tous les contenants
     file.push(id);
     dejaVu.insert(id);
     arbre.insert(std::make_pair(id, "null"));
@@ -80,9 +81,9 @@ std::unordered_map<std::string, std::string> graphe::parcoursBFS(std::string id)
 }
 void graphe::afficherBFS(std::string id) const{
 
-    std::unordered_map<std::string, std::string> arbre = parcoursBFS(id);
+    std::unordered_map<std::string, std::string> arbre = parcoursBFS(id); /// On appelle parcoursBFS de graphe
 
-    for(auto const& elem : arbre)
+    for(auto const& elem : arbre) /// Pour chaque element dans arbre on affiche ce qu'il faut
     {
         std::string courant = elem.first;
         while((arbre.find(courant))->second != "null"){
@@ -119,9 +120,9 @@ std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id,
 }
 void graphe::afficherDFS(std::string id) const{
 
-    std::unordered_map<std::string, std::string> arbre = recursifDFS(id);
+    std::unordered_map<std::string, std::string> arbre = recursifDFS(id); /// On appelle recursifDFS qui va retourner la map qu'il faut
 
-    for(auto const& elem : arbre)
+    for(auto const& elem : arbre) /// On affiche comme il faut
     {
         std::string courant = elem.first;
         std::cout << elem.first;
@@ -132,47 +133,66 @@ void graphe::afficherDFS(std::string id) const{
         std::cout << std::endl;
     }
 }
-int graphe::rechercher_afficherToutesCC() const{
+int graphe::rechercher_afficherToutesCC() const{ /// Permet de retourner le nombre de CC avec affichage
     int composantes = 0;
     std::cout<< std::endl << "composantes connexes :"<<std::endl;
 
     std::unordered_map<std::string, std::string> arbreTotal;
 
-    for(const auto& it : m_sommets){
-        if(arbreTotal.find(it.first) == arbreTotal.end()){
-            auto arbreBFS = parcoursBFS(it.first);
+    for(const auto& it : m_sommets){ /// Pour tous les sommets
+        if(arbreTotal.find(it.first) == arbreTotal.end()){ /// Si le sommet n'a pas été croisé
+            auto arbreBFS = parcoursBFS(it.first); /// Lancer un BFS (qui va donc ranger dans la map tous les sommets d'un composante connexe)
             for(const auto& parcoursArbre : arbreBFS){
+                arbreTotal.insert(parcoursArbre);   /// On insert tous ce qu'on a eu avec le BFS dans l'arbre general contenant tout
+            }
+            composantes++; /// On incremente
+            std::cout << std::endl << "    cc" << composantes;
+            afficherCC(arbreBFS); /// On affiche la composante
+        }
+    }
+    std::cout << std::endl << "Nombre de composantes connexes : " << composantes << std::endl << std::endl;
+
+    return composantes;
+}
+
+int graphe::nombreCC() const{ /// Permet de retourner le nombre de CC sans affichage
+    std::unordered_map<std::string, std::string> arbreTotal;
+    int composantes = 0;
+    for(const auto& it : m_sommets){ /// pour tous les sommets
+        if(arbreTotal.find(it.first) == arbreTotal.end()){ /// On verifie si on l'a deja croise
+            auto arbreBFS = parcoursBFS(it.first); /// Sinon on lajoute avec tous ceux qu'il touche dans une map
+            for(const auto& parcoursArbre : arbreBFS){ ///On insere dans la map
                 arbreTotal.insert(parcoursArbre);
             }
             composantes++;
-            std::cout << std::endl << "    cc" << composantes;
-            afficherCC(arbreBFS);
         }
     }
-    std::cout << std::endl << std::endl;
-
     return composantes;
 }
 
 void graphe::afficherCC(std::unordered_map<std::string,std::string> arbre) const{
     std::cout << std::endl;
-    for(const auto& it : arbre){
+    for(const auto& it : arbre){ /// Affiche chaque element d'une meme composante connexe
         std::cout << "      " << it.first;
     }
 }
 
 int graphe::isEulerien(){
     std::set<int> degre; /// un set qui va stocker le nombre d'arrete pour chaque sommet
+    int nbrComposantes = nombreCC();
     int nbImpair = 0;
-    for (const auto& item: m_sommets)degre.insert(item.second->getDegre()); /// rempli le set
-    for (const auto& item: degre){ /// boucle parcourant le set et comptant le nombre de sommet de degre pair
-            if(item%2 == 1){
-                nbImpair++;
-            }
+    if(nbrComposantes == 1){
+        for (const auto& item: m_sommets)degre.insert(item.second->getDegre()); /// rempli le set
+        for (const auto& item: degre){ /// boucle parcourant le set et comptant le nombre de sommet de degre pair
+                if(item%2 == 1){
+                    nbImpair++;
+                }
+        }
+        if (nbImpair == 2)return 1; /// si 2 nombres impairs alors le graph est une chaine eulerienne
+        else if (nbImpair == 0)return 2; /// si aucun nombre impair alors c'est un cycle eulerien
+        else return 0; /// sinon on renvoit 0 car le graph n'a rien d'eulerien
     }
-    if (nbImpair == 2)return 1; /// si 2 nombres impairs alors le graph est une chaine eulerienne
-    else if (nbImpair == 0)return 2; /// si aucun nombre impair alors c'est un cycle eulerien
-    else return 0; /// sinon on renvoit 0 car le graph n'a rien d'eulerien
+    else    { return 0; } /// Si il y a plusieurs composantes connexes ont dit que le graphe n'est pas eulerien
 }
 
 graphe::~graphe()

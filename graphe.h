@@ -25,10 +25,12 @@ class graphe
         void afficherDFS(std::string) const;
         ///recherche et affiche les composantes connexes
         ///retourne le nombre de composantes connexes
+        int nombreCC() const;
+        /// retourne aussi le nombre de cc mais les affiche en plus
         int rechercher_afficherToutesCC() const;
         ///Permet l'affichage des CC
         void afficherCC(std::unordered_map<std::string,std::string> arbre) const;
-
+        /// Renvoie 0 si graphe pas eulerien, 1 si il ya une chaine eulerienne et 2 si il y a un cycle eulerien
         int isEulerien();
 
         ///lance un parcours en profondeur à partir du sommet d'identifiant id en mode Récursif
