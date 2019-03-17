@@ -44,14 +44,12 @@ std::unordered_map<std::string,std::string> Sommet::parcoursDFS(){
     std::unordered_map<std::string,std::string> arbre;
 
     std::sort(m_voisins.begin(), m_voisins.end(), compareSommets);
-
     for(const auto& elem : m_voisins)
     {
         ///std::cout << "   valeurs du voisins après trie" << (*(elem)).getID() << std::endl;
         /// pour vérifier que le trie s'éffectue correctement et c'est validé
         arbre.insert(std::make_pair((*(elem)).getID(), this->getID()));
     }
-
     return arbre;
 }
 std::unordered_set<std::string> Sommet::rechercherCC() const{
@@ -62,6 +60,10 @@ std::unordered_set<std::string> Sommet::rechercherCC() const{
 
 std::string Sommet::getID()const{
     return m_id;
+}
+
+int Sommet::getDegre()const{
+    return m_voisins.size();
 }
 
 Sommet::~Sommet()

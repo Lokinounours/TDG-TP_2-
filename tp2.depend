@@ -113,26 +113,27 @@
 	<iostream>
 	"graphe.h"
 
-1552846750 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\graphe.cpp
+1552854714 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\graphe.cpp
 	<fstream>
 	<iostream>
 	"graphe.h"
 
-1552846509 c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\graphe.h
+1552854425 c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\graphe.h
 	<string>
 	<unordered_map>
 	<unordered_set>
 	<stack>
 	<queue>
+	<set>
 	"sommet.h"
 
-1552836556 c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\sommet.h
+1552852001 c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\sommet.h
 	<string>
 	<vector>
 	<unordered_map>
 	<unordered_set>
 
-1552843568 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\sommet.cpp
+1552852596 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\sommet.cpp
 	<iostream>
 	<queue>
 	<stack>
@@ -141,7 +142,7 @@
 	<algorithm>
 	"sommet.h"
 
-1552843687 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\main.cpp
+1552854735 source:c:\users\peter\desktop\#théoriegraphes\tdg-tp_2-\main.cpp
 	<iostream>
 	"graphe.h"
 

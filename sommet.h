@@ -23,6 +23,7 @@ class Sommet
         std::unordered_set<std::string> rechercherCC() const;
         ///GETTERS
         std::string getID()const;
+        int getDegre()const;
         /// Fonction(s) inline
         //bool compareSommets(const Sommet* a, const Sommet* b)const { return (a->getID() < b->getID()); } /// Permet de comparer des const Sommet*
         //bool operator<(const Sommet& )

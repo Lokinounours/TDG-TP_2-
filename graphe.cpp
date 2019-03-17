@@ -163,6 +163,20 @@ void graphe::afficherCC(std::unordered_map<std::string,std::string> arbre) const
     }
 }
 
+int graphe::isEulerien(){
+    std::set<int> degre;
+    int nbImpair = 0;
+    for (const auto& item: m_sommets)degre.insert(item.second->getDegre());
+    for (const auto& item: degre){
+            if(item%2 == 1){
+                nbImpair++;
+            }
+    }
+    if (nbImpair == 2)return 1;
+    else if (nbImpair == 0)return 2;
+    else return 0;
+}
+
 graphe::~graphe()
 {
     //dtor

@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <stack>
 #include <queue>
+#include <set>
 #include "sommet.h"
 
 class graphe
@@ -28,6 +29,8 @@ class graphe
         int rechercher_afficherToutesCC() const;
         ///Permet l'affichage des CC
         void afficherCC(std::unordered_map<std::string,std::string> arbre) const;
+
+        int isEulerien();
 
         std::unordered_map<std::string, std::string> recursifDFS(std::string id, std::unordered_map<std::string, std::string> &arbre, std::unordered_set<std::string> &dejaVu) const;
         std::unordered_map<std::string, std::string> recursifDFS(std::string id) const;
