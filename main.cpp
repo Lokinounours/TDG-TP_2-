@@ -36,7 +36,7 @@ int main()
             case 6:
                 {
                     int ncc=g.rechercher_afficherToutesCC();
-                    std::cout << "Nombre de composantes connexes : " << ncc;
+                    std::cout << "Nombre de composantes connexes : " << ncc << std::endl;
                     break;
                 }
             default:
@@ -45,11 +45,8 @@ int main()
                     break;
                 }
         }
-
-
-
-
         std::cout << "Would you like to continue ?" << std::endl;
+        std::cout << "1-Yes/2-No" << std::endl;
         std::cin >> continuer;
     }
     return 0;
