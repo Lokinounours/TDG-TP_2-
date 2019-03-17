@@ -3,7 +3,7 @@
 
 int main()
 {
-    graphe g{"graphe_1.txt"};
+    graphe g{"graphe_2.txt"};
     //std::cout << g.isEulerien();
     //g.afficher();
     //g.afficherBFS("1");

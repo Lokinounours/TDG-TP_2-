@@ -106,12 +106,11 @@ std::unordered_map<std::string, std::string> graphe::recursifDFS(std::string id,
     Sommet* s0 = (m_sommets.find(id))->second; /// first = id/ second = ptr
     std::unordered_map<std::string, std::string> arbreSommet = s0->parcoursDFS(); /// Renvoie en format : Valeur/predecesseur
     /// on retrouve ainsi l'ensemble des voisions du sommet(id)
-
     for(auto const& elem : arbreSommet)
     {
-            if (dejaVu.find(elem.first) == dejaVu.end()){ /// si le sommet n'est pas visité alors on rajoute le sommet dans arbre et on relance le programme avec le sommet en id
-                arbre.insert({elem.first, id});
-                recursifDFS(elem.first, arbre, dejaVu);
+        if (dejaVu.find(elem.first) == dejaVu.end()){ /// si le sommet n'est pas visité alors on rajoute le sommet dans arbre et on relance le programme avec le sommet en id
+            arbre.insert({elem.first, id});
+            recursifDFS(elem.first, arbre, dejaVu);
         }
     }
     /// une fois la récursivité finie on peut envoyer l'arbre à afficherDFS
@@ -122,7 +121,6 @@ void graphe::afficherDFS(std::string id) const{
 
     std::unordered_map<std::string, std::string> arbre = recursifDFS(id);
 
-    std::cout << arbre.size();
     for(auto const& elem : arbre)
     {
         std::string courant = elem.first;
